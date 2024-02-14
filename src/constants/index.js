@@ -207,13 +207,13 @@ export const projects = [
     theme: 'btn-back-green',
     name: 'Virtual Public Consultation',
     description: 'Created a 24/7 accessible online platform for community planning consultations, enhancing user engagement through an interactive interface and real-time features.',
-    link: 'https://github.com/adrianhajdin/threads',
+    link: 'https://virtualconsultation.the360expo.com/',
   },
   {
     iconUrl: car,
     theme: 'btn-back-blue',
     name: 'Vantage Touchscreen',
     description: 'Developed an interactive touchscreen system for sales centers, integrating CGI content like 360 tours and site plans, significantly improving customer experience and interaction.',
-    link: 'https://github.com/adrianhajdin/project_next13_car_showcase',
+    link: 'https://www.vantage.eyesiteview.uk/frontend/testsite',
   },
 ];

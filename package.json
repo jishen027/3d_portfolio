@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://jishen027.github.io/3d_portfolio/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

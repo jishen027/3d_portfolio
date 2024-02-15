@@ -9,8 +9,15 @@ const Plane = ({ isRotating, ...props }) => {
   const { scene, animations } = useGLTF(planeScene);
   const { actions } = useAnimations(animations, ref);
 
+  const setRotation = (object, speed) => {
+    object.rotation.y  = 1.5;
+    object.rotation.x = 0.5;
+    object.rotation.z = 0.5;
+  }
+
   useEffect(() => {
     actions["Take 001"].play();
+    setRotation(ref.current, 0.01);
   }, [isRotating, actions]);
 
   return (

@@ -6,6 +6,7 @@ import Plane from "../models/Plane";
 import { useState } from "react";
 import HomeInfo from "../components/HomeInfo";
 import Earth from "../models/Eearth";
+import Sky from "../models/Sky";
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
@@ -15,11 +16,11 @@ const Home = () => {
     let screenScale, screenPosition;
 
     if (window.innerWidth < 768) {
-      screenScale = [1.5, 1.5, 1.5];
-      screenPosition = [0, -1.5, 0];
+      screenScale = [1, 1, 1];
+      screenPosition = [0, -1, -2];
     } else {
-      screenScale = [3, 3, 3];
-      screenPosition = [0, -4, -4];
+      screenScale = [2, 2, 2];
+      screenPosition = [0, -2, -4];
     }
 
     return [screenScale, screenPosition];
@@ -86,7 +87,7 @@ const Home = () => {
             groundColor="#000000"
             intensity={0.5}
           />
-          {/* <Sky isRotating={isRotating} /> */}
+          <Sky isRotating={isRotating} />
           {/* <Island
             position={islandPosition}
             scale={islandScale}
@@ -112,8 +113,6 @@ const Home = () => {
           />
         </Suspense>
       </Canvas>
-   
-    
     </section>
   );
 };

@@ -75,16 +75,23 @@ const About = () => {
                     />
                   </div>
                 }
-                iconStyle={{ background: experience.iconBg }}
+                contentStyle={{
+                  borderBottom: "8px",
+                  borderStyle: "solid",
+                  borderBottomColor: experience.iconBg,
+                  boxShadow: "none",
+                }}
               >
-                <div className="text-black">
+                <div>
                   <h3 className="text-black text-xl font-poppins font-semibold">
                     {experience.title}
                   </h3>
-                  <h4 className="text-black text-lg font-poppins font-semibold">
-                    {experience.company}
-                  </h4>
-                  <p>{experience.description}</p>
+                  <p
+                    className="text-black-500 font-medium text-base"
+                    style={{ margin: 0 }}
+                  >
+                    {experience.company_name}
+                  </p>
                 </div>
                 <ul className="my-5 list-disc ml-5 space-y-2">
                   {experience.points.map((point, index) => (

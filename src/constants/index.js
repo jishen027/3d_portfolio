@@ -202,18 +202,18 @@ export const projects = [
     description: 'Developed a web application to Share and Discover ChatGPT Prompts for Writing, Drawing, and other Creative Activities.',
     link: 'https://www.promptnotfound.com/',
   },
-  // {
-  //   iconUrl: threads,
-  //   theme: 'btn-back-green',
-  //   name: 'Virtual Public Consultation',
-  //   description: 'Created a 24/7 accessible online platform for community planning consultations, enhancing user engagement through an interactive interface and real-time features.',
-  //   link: 'https://virtualconsultation.the360expo.com/',
-  // },
-  // {
-  //   iconUrl: car,
-  //   theme: 'btn-back-blue',
-  //   name: 'Vantage Touchscreen',
-  //   description: 'Developed an interactive touchscreen system for sales centers, integrating CGI content like 360 tours and site plans, significantly improving customer experience and interaction.',
-  //   link: 'https://www.vantage.eyesiteview.uk/frontend/testsite',
-  // },
+  {
+    iconUrl: threads,
+    theme: 'btn-back-green',
+    name: 'Evently',
+    description: 'Online event booking platform for virtual and in-person events, enabling users to discover and book events in their area.',
+    link: 'https://evently-gold-tau.vercel.app/',
+  },
+  {
+    iconUrl: car,
+    theme: 'btn-back-blue',
+    name: 'My Notes',
+    description: 'Note-taking app that allows users to create, edit, and delete notes, and organize them into categories.',
+    link: 'https://jishen027.github.io/my-notes/',
+  },
 ];

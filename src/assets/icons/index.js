@@ -33,6 +33,7 @@ import myfair from './myfair.svg'
 import oasis from './oasis.png'
 import sheffield from './sheffield.svg'
 import ajou from './ajou.png'
+import pyronix from './pyronix.png'
 
 
 export {
@@ -70,5 +71,6 @@ export {
     myfair,
     oasis,
     sheffield,
-    ajou
+    ajou,
+    pyronix,
 }

@@ -31,6 +31,7 @@ import {
   sheffield,
   ajou,
   myfair,
+  pyronix,
 } from "../assets/icons";
 
 export const skills = [
@@ -123,11 +124,24 @@ export const skills = [
 
 export const experiences = [
   {
+    title: "Cloud Application Developer",
+    company_name: "Pyronix",
+    icon: pyronix,
+    iconBg: "#f1f1f1",
+    date: "2024 June - Present",
+    points: [
+      "Developing and maintaining cloud applications for Pyronix, a leading provider of security solutions.",
+      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
+      "Implementing responsive design and ensuring cross-browser compatibility.",
+      "Participating in code reviews and providing constructive feedback to other developers.",
+    ],
+  },
+  {
     title: "Software Developer",
     company_name: "Oasis Studio",
     icon: oasis,
     iconBg: "#accbe1",
-    date: " 2022 October - Present",
+    date: " 2022 October - 2024 June",
     points: [
       "Developing and maintaining web applications using React.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -180,7 +194,7 @@ export const socialLinks = [
   {
     name: 'Contact',
     iconUrl: contact,
-    link: '/contact',
+    link: '/3d_portfolio/contact',
   },
   {
     name: 'GitHub',

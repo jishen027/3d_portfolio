@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
@@ -11,6 +10,14 @@ const Navbar = () => {
         <p className="text-white font-bold text-2xl">JL</p>
       </NavLink>
       <nav className="flex items-center justify-center space-x-4 text-xl font-semibold p-4">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive ? "text-orange-500" : "text-black-500"
+          }
+        >
+          Home
+        </NavLink>
         <NavLink
           to="/about"
           className={({ isActive }) =>

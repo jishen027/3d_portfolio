@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -51,7 +51,7 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .header {
-    @apply flex justify-between items-center sm:px-16 px-8 py-4  mx-auto absolute top-0 bg-transparent z-10 right-0 left-0 bg-gradient-to-r from-[#00c6ff] to-[#0072ff] shadow-card w-full;
+    @apply flex justify-between items-center px-10 py-8 fixed top-0 z-50 w-full bg-transparent;
   }
 
   .footer {
@@ -63,11 +63,15 @@ body:has(.card[data-color="green"]:hover) {
   }
 
   .info-box {
-    @apply mx-5 relative flex text-white flex-col gap-3 max-w-2xl neo-brutalism-blue pt-4 pb-12 px-8;
+    @apply mx-5 relative flex text-foreground flex-col gap-3 max-w-2xl pt-4 pb-12 px-8;
+    background: rgba(242, 242, 242, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(26, 26, 26, 0.12);
   }
 
   .neo-btn {
-    @apply py-3 px-6 rounded-lg text-blue-500 text-center font-semibold sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3;
+    @apply py-3 px-6 bg-foreground text-surface text-center font-bold text-[10px] uppercase tracking-widest sm:w-1/2 w-[90%] -bottom-5 absolute mx-auto right-0 left-0 flex justify-center items-center gap-3 hover:bg-zinc-800 transition-all;
   }
 
   .cta {

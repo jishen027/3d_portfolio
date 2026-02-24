@@ -3,17 +3,22 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <header className="header">
+      {/* Text-based logo mark */}
       <NavLink
         to="/"
-        className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-2xl font-bold shadow-lg"
+        className="font-bold text-lg tracking-tighter uppercase text-foreground hover:opacity-70 transition-opacity"
       >
-        <p className="text-white font-bold text-2xl">JL</p>
+        Jeb Lee
       </NavLink>
-      <nav className="flex items-center justify-center space-x-4 text-xl font-semibold p-4">
+
+      {/* Minimal uppercase nav links */}
+      <nav className="flex items-center space-x-10">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "text-orange-500" : "text-black-500"
+            `text-[10px] font-bold uppercase tracking-[0.3em] transition-opacity ${
+              isActive ? "opacity-100" : "opacity-40 hover:opacity-100"
+            }`
           }
         >
           Home
@@ -21,7 +26,9 @@ const Navbar = () => {
         <NavLink
           to="/about"
           className={({ isActive }) =>
-            isActive ? "text-orange-500" : "text-black-500"
+            `text-[10px] font-bold uppercase tracking-[0.3em] transition-opacity ${
+              isActive ? "opacity-100" : "opacity-40 hover:opacity-100"
+            }`
           }
         >
           About
@@ -29,7 +36,9 @@ const Navbar = () => {
         <NavLink
           to="/projects"
           className={({ isActive }) =>
-            isActive ? "text-orange-500" : "text-black-500"
+            `text-[10px] font-bold uppercase tracking-[0.3em] transition-opacity ${
+              isActive ? "opacity-100" : "opacity-40 hover:opacity-100"
+            }`
           }
         >
           Projects
@@ -37,7 +46,9 @@ const Navbar = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            isActive ? "text-orange-500" : "text-black-500"
+            `text-[10px] font-bold uppercase tracking-[0.3em] transition-opacity ${
+              isActive ? "opacity-100" : "opacity-40 hover:opacity-100"
+            }`
           }
         >
           Contact

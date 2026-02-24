@@ -1,0 +1,202 @@
+import React, { useState, useEffect, useRef } from 'react';
+
+const App = () => {
+  const mountRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // --- Three.js Script Loading ---
+  useEffect(() => {
+    if (window.THREE) {
+      setIsLoaded(true);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+    script.async = true;
+    script.onload = () => setIsLoaded(true);
+    document.head.appendChild(script);
+  }, []);
+
+  // --- Three.js Scene Setup ---
+  useEffect(() => {
+    if (!isLoaded || !mountRef.current) return;
+
+    const THREE = window.THREE;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    camera.position.z = 6;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    mountRef.current.appendChild(renderer.domElement);
+
+    // --- Earth (Low Poly Tech Style) ---
+    const earthGroup = new THREE.Group();
+    
+    // Core: Soft white glass
+    const earthGeom = new THREE.IcosahedronGeometry(2, 2);
+    const earthMat = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      flatShading: true,
+      metalness: 0,
+      roughness: 0.2,
+      transmission: 0.6,
+      transparent: true,
+      opacity: 0.4,
+    });
+    const earth = new THREE.Mesh(earthGeom, earthMat);
+    
+    // Wireframe: Structural look
+    const earthWireMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.1 });
+    const earthWire = new THREE.LineSegments(new THREE.WireframeGeometry(earthGeom), earthWireMat);
+    
+    earthGroup.add(earth);
+    earthGroup.add(earthWire);
+    scene.add(earthGroup);
+
+    // --- Plane (Minimalist Geometric) ---
+    const planeGroup = new THREE.Group();
+    const planeBodyGeom = new THREE.ConeGeometry(0.15, 0.6, 3);
+    const planeMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const planeBody = new THREE.Mesh(planeBodyGeom, planeMat);
+    planeBody.rotation.x = Math.PI / 2;
+    
+    const wingGeom = new THREE.BoxGeometry(0.8, 0.02, 0.2);
+    const wing = new THREE.Mesh(wingGeom, planeMat);
+    
+    const planeModel = new THREE.Group();
+    planeModel.add(planeBody);
+    planeModel.add(wing);
+    planeModel.position.x = 3.5; // Orbit radius
+    
+    planeGroup.add(planeModel);
+    scene.add(planeGroup);
+
+    // --- Lighting ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
+    dirLight.position.set(5, 5, 5);
+    scene.add(dirLight);
+
+    // --- Interaction & Animation ---
+    let mouseX = 0, mouseY = 0;
+    const onMouseMove = (e) => {
+      mouseX = (e.clientX / width) * 2 - 1;
+      mouseY = -(e.clientY / height) * 2 + 1;
+    };
+    window.addEventListener('mousemove', onMouseMove);
+
+    let animationId;
+    const animate = () => {
+      animationId = requestAnimationFrame(animate);
+      
+      // Earth rotations
+      earthGroup.rotation.y += 0.002;
+      earthGroup.rotation.x += (mouseY * 0.2 - earthGroup.rotation.x) * 0.05;
+      earthGroup.rotation.y += (mouseX * 0.2 - earthGroup.rotation.y) * 0.05;
+
+      // Plane orbit
+      planeGroup.rotation.y += 0.015;
+      planeGroup.rotation.z += 0.005;
+      planeModel.rotation.y += 0.05; // Spin individual plane slightly
+
+      renderer.render(scene, camera);
+    };
+    animate();
+
+    const handleResize = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationId);
+      mountRef.current?.removeChild(renderer.domElement);
+    };
+  }, [isLoaded]);
+
+  return (
+    <div className="relative min-h-screen bg-[#F2F2F2] text-[#1A1A1A] font-sans overflow-hidden">
+      
+      {/* Background Grid */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+           style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, backgroundSize: '60px 60px' }}>
+      </div>
+
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-10 py-10">
+        <div className="font-bold text-lg tracking-tighter uppercase">Jeb Lee</div>
+        <div className="flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em] opacity-40">
+          <a href="#" className="hover:opacity-100 transition-opacity">Work</a>
+          <a href="#" className="hover:opacity-100 transition-opacity">Info</a>
+          <a href="#" className="hover:opacity-100 transition-opacity">Contact</a>
+        </div>
+      </nav>
+
+      {/* The "Frame" Layout - Ensuring center is clear */}
+      <div className="relative z-10 w-full h-screen p-10 flex flex-col justify-between pointer-events-none">
+        
+        {/* Top Section */}
+        <div className="flex justify-between items-start pt-16 md:pt-24">
+          <div className="max-w-xs">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none mb-4">
+              CRAFTING<br/>NEW<br/>WORLDS.
+            </h1>
+          </div>
+          <div className="hidden md:block text-right">
+            <p className="font-mono text-[10px] uppercase tracking-widest opacity-40 mb-2">Current Location</p>
+            <p className="text-xs font-medium">Stockholm, SE / 59.3293° N</p>
+          </div>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-end pb-10">
+          <div className="max-w-sm pointer-events-auto">
+            <p className="text-xs md:text-sm font-light leading-relaxed mb-6 opacity-60">
+              A Software Engineer specializing in the intersection of 3D art and functional code. Building digital experiences that defy flat constraints.
+            </p>
+            <div className="flex gap-4">
+              <button className="px-6 py-3 bg-black text-white text-[10px] uppercase tracking-widest font-bold hover:bg-zinc-800 transition-all">
+                See Projects
+              </button>
+            </div>
+          </div>
+          
+          <div className="mt-10 md:mt-0 text-right">
+            <div className="font-mono text-[10px] uppercase tracking-[0.5em] opacity-20 mb-4">
+              EST. 2024 — PERSISTENT
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 3D Canvas - Centered and clear of text */}
+      <div ref={mountRef} className="absolute inset-0 z-0" />
+
+      {/* Corner Decorative Elements */}
+      <div className="fixed top-1/2 left-6 -translate-y-1/2 hidden lg:block opacity-20">
+        <div className="h-32 w-[1px] bg-black mb-4 mx-auto"></div>
+        <div className="font-mono text-[9px] uppercase tracking-widest [writing-mode:vertical-lr] rotate-180">Navigation Node</div>
+      </div>
+      
+      <div className="fixed top-1/2 right-6 -translate-y-1/2 hidden lg:block opacity-20">
+        <div className="font-mono text-[9px] uppercase tracking-widest [writing-mode:vertical-lr]">System Protocol</div>
+        <div className="h-32 w-[1px] bg-black mt-4 mx-auto"></div>
+      </div>
+
+    </div>
+  );
+};
+
+export default App;

@@ -16,11 +16,14 @@ export default {
         },
         blue: {
           500: "#2b77e7"
-        }
+        },
+        surface: "#F2F2F2",
+        foreground: "#1A1A1A",
       },
       fontFamily: {
         worksans: ["Work Sans", "sans-serif"],
-        poppins: ['Poppins', "sans-serif"]
+        poppins: ['Poppins', "sans-serif"],
+        mono: ['IBM Plex Mono', 'JetBrains Mono', 'monospace'],
       },
       boxShadow: {
         card: '0px 1px 2px 0px rgba(0, 0, 0, 0.05)'

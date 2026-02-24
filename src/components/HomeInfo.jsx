@@ -4,20 +4,37 @@ import { arrow } from "../assets/icons";
 
 const InfoBox = ({ text, link, btnText }) => (
   <div className="info-box">
-    <p className="font-medium sm:text-xl text-center">{text}</p>
-    <Link to={link} className="neo-brutalism-white text-center neo-btn">
+    <p className="font-medium sm:text-xl text-center text-foreground">{text}</p>
+    <Link to={link} className="neo-btn">
       {btnText}
-      <img src={arrow} alt="arrow" className="w-4 h-4 object-contain" />
+      <img src={arrow} alt="arrow" className="w-4 h-4 object-contain invert" />
     </Link>
   </div>
 );
 
 const renderContent = {
   1: (
-    <h1 className="sm: text-xl sm:leading-snug text-center neo-brutalism-blue py-4 px-8 text-white mx-5">
-      Hi, I am <span className="font-semibold">Jeb Lee</span>
-      <br />A Software Engineer with a passion for 3D art and Creative Coding
-    </h1>
+    <div className="mx-5 max-w-2xl py-5 px-8 text-center"
+      style={{
+        background: "rgba(242, 242, 242, 0.75)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(26, 26, 26, 0.1)",
+      }}
+    >
+      <h2
+        className="text-xs uppercase tracking-[0.4em] mb-3 opacity-40"
+        style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+      >
+        Hello, I am
+      </h2>
+      <p className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground leading-tight">
+        Jeb Lee
+      </p>
+      <p className="text-xs sm:text-sm font-light mt-2 opacity-60 leading-relaxed">
+        A Software Engineer with a passion for 3D art &amp; Creative Coding
+      </p>
+    </div>
   ),
   2: (
     <InfoBox
@@ -47,3 +64,4 @@ const HomeInfo = ({ currentStage }) => {
 };
 
 export default HomeInfo;
+

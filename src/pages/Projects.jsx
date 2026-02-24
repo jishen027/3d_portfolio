@@ -33,9 +33,18 @@ const Projects = () => {
             {/* Card Top */}
             <div>
               <div className="flex justify-between items-start mb-12">
-                <span className="font-mono text-[10px] opacity-30 group-hover:text-white group-hover:opacity-100">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-[10px] opacity-30 group-hover:text-white group-hover:opacity-100">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {project.iconUrl && (
+                    <img
+                      src={project.iconUrl}
+                      alt={`${project.name} icon`}
+                      className="w-6 h-6 object-contain opacity-60 group-hover:opacity-100 group-hover:invert"
+                    />
+                  )}
+                </div>
                 <Link
                   to={project.link}
                   target="_blank"

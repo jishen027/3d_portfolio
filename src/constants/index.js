@@ -32,6 +32,8 @@ import {
   ajou,
   myfair,
   pyronix,
+  promptnotfound,
+  hiiragiexam,
 } from "../assets/icons";
 
 export const skills = [
@@ -210,7 +212,7 @@ export const socialLinks = [
 
 export const projects = [
   {
-    iconUrl: pricewise,
+    iconUrl: promptnotfound,
     theme: 'btn-back-red',
     name: 'Prompt Not Found',
     description: 'Developed a web application to Share and Discover ChatGPT Prompts for Writing, Drawing, and other Creative Activities.',
@@ -218,7 +220,7 @@ export const projects = [
     tech: ['Next.js', 'Tailwind', 'OpenAI'],
   },
   {
-    iconUrl: threads,
+    iconUrl: hiiragiexam,
     theme: 'btn-back-green',
     name: 'Hiiragi Exam',
     description: 'Onlin exam platform for virtual and in-person exams, enabling users to discover and book exams in their area.',
@@ -226,7 +228,7 @@ export const projects = [
     tech: ['Next.js', 'Tailwind', 'AWS', 'Supabase'],
   },
   {
-    iconUrl: car,
+    iconUrl: github,
     theme: 'btn-back-blue',
     name: 'GenCertQuiz',
     description: 'A RAG-powered certification quiz generator that uses a Multi-Agent AI System to ingest textbooks and generate high-quality, exam-style questions.',

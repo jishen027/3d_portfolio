@@ -34,6 +34,8 @@ import oasis from './oasis.png'
 import sheffield from './sheffield.svg'
 import ajou from './ajou.png'
 import pyronix from './pyronix.png'
+import promptnotfound from './promptnotfound.svg'
+import hiiragiexam from './hiiragiexam.svg'
 
 
 export {
@@ -73,4 +75,6 @@ export {
     sheffield,
     ajou,
     pyronix,
+    promptnotfound,
+    hiiragiexam,
 }

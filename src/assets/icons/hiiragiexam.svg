@@ -1,0 +1,6 @@
+<svg id="faviconSvg" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 40 40" fill="none">
+                    <rect x="2" y="2" width="36" height="36" rx="2" stroke="#1A1A1A" stroke-width="4"></rect>
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#1A1A1A" style="font-family: sans-serif; font-weight: 900; font-style: italic; font-size: 22px; letter-spacing: -1px;">
+                      H.
+                    </text>
+                </svg>

@@ -1,119 +1,176 @@
 import React from "react";
-import { skills, experiences } from "../constants";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
-import CTA from "../components/CTA";
+import { skills, experiences, socialLinks } from "../constants";
+
+// Helper to derive a zero-padded index label
+const padIndex = (i) => `0${i}`;
 
 const About = () => {
   return (
-    <section className="max-container">
-      <h1 className="head-text">
-        Hello, I am{" "}
-        <span className="blue-gradient_text font-semibold drop-shadow">
-          Jeb Lee
-        </span>
-      </h1>
+    <section className="min-h-screen bg-surface text-foreground selection:bg-black selection:text-white">
 
-      <div className="mt-5 flex flex-col gap-3 text-slate-500 ">
-        <p>
-          Software Engineer with a passion for building web applications. I
-          specialize in front-end development and have experience working with
-          modern frameworks like React and Next.js. I am also familiar with
-          back-end technologies like Node.js and Express. as well as cloud
-          services like Docker/Kubernetes and AWS.
-        </p>
-      </div>
+      {/* Subtle background grid overlay */}
+      <div
+        className="fixed inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage: `linear-gradient(rgba(26,26,26,1) 1px, transparent 1px), linear-gradient(90deg, rgba(26,26,26,1) 1px, transparent 1px)`,
+          backgroundSize: "60px 60px",
+          opacity: 0.03,
+        }}
+      />
 
-      <div className="py-10 flex flex-col">
-        <h3 className="subhead-text">My Skills</h3>
-        <div className="mt-16 flex flex-wrap gap-12">
-          {skills.map((skill, index) => (
-            <div className="block-container w-20 h-20" key={index}>
-              <div className="rounded-xl" key={index}>
-                <div
-                  key={index}
-                  className="btn-front rounded-xl justify-center items-center flex flex-col  "
-                >
-                  <img
-                    src={skill.imageUrl}
-                    alt={skill.name}
-                    className="w-1/2 h-1/2 object-contain"
-                  />
-                  <p className="mt-3 text-sm font-semibold">{skill.name}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <div className="relative z-10 px-8 md:px-24 pt-36 pb-32">
 
-      <div className="py-16">
-        <h3 className="subhead-text">Experience</h3>
-        <div className="mt-5 flex flex-col gap-3 text-slate-500 ">
-          <p>
-            I have worked with many companies and picked up many skills along
-            the way.
-          </p>
+        {/* ── Profile Intro ──────────────────────────────────────── */}
+        <div className="grid md:grid-cols-2 gap-16 md:gap-24 mb-32">
+          <div>
+            <p
+              className="text-[10px] uppercase tracking-[0.4em] mb-6 opacity-40"
+              style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            >
+              [ Profile Overview ]
+            </p>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight mb-0">
+              Hello, I am{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-zinc-400">
+                Jeb Lee.
+              </span>
+            </h1>
+          </div>
+          <div className="flex items-center">
+            <p className="text-base md:text-lg font-light leading-relaxed text-zinc-600">
+              Software Engineer with a passion for building web applications. I
+              specialize in front-end development and have experience working
+              with modern frameworks like{" "}
+              <span className="text-foreground font-medium underline decoration-zinc-300">
+                React and Next.js
+              </span>
+              . I am also familiar with back-end technologies like Node.js and
+              Express, as well as cloud services like Docker, Kubernetes, and
+              AWS.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-12 flex">
-          <VerticalTimeline>
-            {experiences.map((experience, index) => (
-              <VerticalTimelineElement
-                key={index}
-                className="vertical-timeline-element--work"
-                date={experience.date}
-                icon={
-                  <div className="flex justify-center items-center w-full h-full">
-                    <img
-                      src={experience.icon}
-                      alt={experience.company_name}
-                      className="w-[80%] h-[80%] object-contain"
-                    />
-                  </div>
-                }
-                contentStyle={{
-                  borderBottom: "8px",
-                  borderStyle: "solid",
-                  borderBottomColor: experience.iconBg,
-                  boxShadow: "none",
-                }}
+        {/* ── Tech Stack Grid ────────────────────────────────────── */}
+        <div className="mb-32">
+          <div className="flex items-center gap-4 mb-12">
+            <div className="h-px w-12 bg-foreground" />
+            <h2
+              className="text-xs uppercase tracking-[0.5em] font-bold"
+              style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            >
+              Tech Stack
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-px bg-zinc-200 border border-zinc-200">
+            {skills.map((skill, i) => (
+              <div
+                key={skill.name}
+                className="bg-surface p-6 aspect-square flex flex-col justify-center items-center group hover:bg-foreground transition-colors duration-300"
               >
-                <div>
-                  <h3 className="text-black text-xl font-poppins font-semibold">
-                    {experience.title}
-                  </h3>
-                  <p
-                    className="text-black-500 font-medium text-base"
-                    style={{ margin: 0 }}
-                  >
-                    {experience.company_name}
-                  </p>
-                </div>
-                <ul className="my-5 list-disc ml-5 space-y-2">
-                  {experience.points.map((point, index) => (
-                    <li
-                      key={index}
-                      className="text-black text-sm font-poppins font-normal"
+                <span
+                  className="text-[10px] opacity-30 group-hover:opacity-60 group-hover:text-surface mb-3 uppercase tracking-tighter"
+                  style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                >
+                  {padIndex(i + 1)}
+                </span>
+                <img
+                  src={skill.imageUrl}
+                  alt={skill.name}
+                  className="w-8 h-8 object-contain mb-2 group-hover:invert transition-all duration-300"
+                />
+                <span className="text-[9px] font-bold uppercase tracking-widest text-center group-hover:text-surface leading-tight">
+                  {skill.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Experience Timeline ────────────────────────────────── */}
+        <div className="max-w-4xl mx-auto mb-32">
+          <div className="flex items-center gap-4 mb-16">
+            <div className="h-px w-12 bg-foreground" />
+            <h2
+              className="text-xs uppercase tracking-[0.5em] font-bold"
+              style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            >
+              Experience
+            </h2>
+          </div>
+
+          <div>
+            {experiences.map((exp, i) => (
+              <div key={i} className="relative pl-10 pb-16 group last:pb-0">
+                {/* Timeline vertical line */}
+                {i < experiences.length - 1 && (
+                  <div className="absolute left-[4px] top-3 bottom-0 w-px bg-zinc-200" />
+                )}
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-[10px] w-[9px] h-[9px] bg-surface border-2 border-foreground rounded-full z-10" />
+
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3">
+                  <div>
+                    <h3 className="text-lg font-bold tracking-tight">{exp.title}</h3>
+                    <p
+                      className="text-xs font-medium opacity-40 uppercase tracking-widest mt-0.5"
+                      style={{ fontFamily: "'IBM Plex Mono', monospace" }}
                     >
-                      {point}
+                      {exp.company_name}
+                    </p>
+                  </div>
+                  <div
+                    className="text-[10px] opacity-40 mt-2 md:mt-0 px-3 py-1 border border-zinc-200 whitespace-nowrap"
+                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                  >
+                    {exp.date}
+                  </div>
+                </div>
+
+                <ul className="space-y-1.5 mt-2">
+                  {exp.points.map((point, j) => (
+                    <li
+                      key={j}
+                      className="text-sm font-light leading-relaxed text-zinc-500 flex items-start gap-2"
+                    >
+                      <span className="opacity-30 mt-1 shrink-0">—</span>
+                      <span>{point}</span>
                     </li>
                   ))}
                 </ul>
-              </VerticalTimelineElement>
+              </div>
             ))}
-          </VerticalTimeline>
+          </div>
         </div>
+
+        {/* ── CTA Footer ────────────────────────────────────────── */}
+        <div className="pt-16 border-t border-zinc-200 text-center">
+          <h3 className="text-3xl font-bold tracking-tighter mb-8">
+            Have a project in mind?
+          </h3>
+          <div
+            className="flex justify-center gap-12 text-[10px] uppercase tracking-[0.5em] opacity-40"
+            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+          >
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.link}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:opacity-100 transition-opacity"
+              >
+                {social.name}
+              </a>
+            ))}
+          </div>
+        </div>
+
       </div>
-
-      <hr className="border-slate-200" />
-
-      <CTA />
     </section>
   );
 };
 
 export default About;
+

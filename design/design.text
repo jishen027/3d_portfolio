@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 const App = () => {
   const mountRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [view, setView] = useState('home'); // 'home' or 'about'
 
   // --- Three.js Script Loading ---
   useEffect(() => {
@@ -36,8 +37,6 @@ const App = () => {
 
     // --- Earth (Low Poly Tech Style) ---
     const earthGroup = new THREE.Group();
-    
-    // Core: Soft white glass
     const earthGeom = new THREE.IcosahedronGeometry(2, 2);
     const earthMat = new THREE.MeshPhysicalMaterial({
       color: 0xffffff,
@@ -49,30 +48,25 @@ const App = () => {
       opacity: 0.4,
     });
     const earth = new THREE.Mesh(earthGeom, earthMat);
-    
-    // Wireframe: Structural look
-    const earthWireMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.1 });
+    const earthWireMat = new THREE.LineBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.05 });
     const earthWire = new THREE.LineSegments(new THREE.WireframeGeometry(earthGeom), earthWireMat);
     
     earthGroup.add(earth);
     earthGroup.add(earthWire);
     scene.add(earthGroup);
 
-    // --- Plane (Minimalist Geometric) ---
+    // --- Plane ---
     const planeGroup = new THREE.Group();
-    const planeBodyGeom = new THREE.ConeGeometry(0.15, 0.6, 3);
+    const planeBodyGeom = new THREE.ConeGeometry(0.12, 0.5, 3);
     const planeMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
     const planeBody = new THREE.Mesh(planeBodyGeom, planeMat);
     planeBody.rotation.x = Math.PI / 2;
-    
-    const wingGeom = new THREE.BoxGeometry(0.8, 0.02, 0.2);
+    const wingGeom = new THREE.BoxGeometry(0.7, 0.02, 0.15);
     const wing = new THREE.Mesh(wingGeom, planeMat);
-    
     const planeModel = new THREE.Group();
     planeModel.add(planeBody);
     planeModel.add(wing);
-    planeModel.position.x = 3.5; // Orbit radius
-    
+    planeModel.position.x = 3.5; 
     planeGroup.add(planeModel);
     scene.add(planeGroup);
 
@@ -83,7 +77,6 @@ const App = () => {
     dirLight.position.set(5, 5, 5);
     scene.add(dirLight);
 
-    // --- Interaction & Animation ---
     let mouseX = 0, mouseY = 0;
     const onMouseMove = (e) => {
       mouseX = (e.clientX / width) * 2 - 1;
@@ -94,17 +87,18 @@ const App = () => {
     let animationId;
     const animate = () => {
       animationId = requestAnimationFrame(animate);
-      
-      // Earth rotations
       earthGroup.rotation.y += 0.002;
-      earthGroup.rotation.x += (mouseY * 0.2 - earthGroup.rotation.x) * 0.05;
-      earthGroup.rotation.y += (mouseX * 0.2 - earthGroup.rotation.y) * 0.05;
-
-      // Plane orbit
-      planeGroup.rotation.y += 0.015;
-      planeGroup.rotation.z += 0.005;
-      planeModel.rotation.y += 0.05; // Spin individual plane slightly
-
+      earthGroup.rotation.x += (mouseY * 0.1 - earthGroup.rotation.x) * 0.05;
+      earthGroup.rotation.y += (mouseX * 0.1 - earthGroup.rotation.y) * 0.05;
+      planeGroup.rotation.y += 0.012;
+      planeGroup.rotation.z += 0.003;
+      
+      // Shift scene when on About page
+      const targetX = view === 'about' ? -3 : 0;
+      const targetOpacity = view === 'about' ? 0.2 : 1;
+      earthGroup.position.x += (targetX - earthGroup.position.x) * 0.05;
+      earthGroup.scale.setScalar(view === 'about' ? 0.8 : 1);
+      
       renderer.render(scene, camera);
     };
     animate();
@@ -124,73 +118,181 @@ const App = () => {
       cancelAnimationFrame(animationId);
       mountRef.current?.removeChild(renderer.domElement);
     };
-  }, [isLoaded]);
+  }, [isLoaded, view]);
 
   return (
-    <div className="relative min-h-screen bg-[#F2F2F2] text-[#1A1A1A] font-sans overflow-hidden">
+    <div className="relative min-h-screen bg-[#F2F2F2] text-[#1A1A1A] font-sans selection:bg-black selection:text-white">
       
       {/* Background Grid */}
-      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+      <div className="fixed inset-0 z-0 opacity-[0.03] pointer-events-none" 
            style={{ backgroundImage: `linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)`, backgroundSize: '60px 60px' }}>
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-10 py-10">
-        <div className="font-bold text-lg tracking-tighter uppercase">Jeb Lee</div>
-        <div className="flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em] opacity-40">
-          <a href="#" className="hover:opacity-100 transition-opacity">Work</a>
-          <a href="#" className="hover:opacity-100 transition-opacity">Info</a>
-          <a href="#" className="hover:opacity-100 transition-opacity">Contact</a>
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 md:px-16 py-10 bg-[#F2F2F2]/80 backdrop-blur-sm">
+        <div 
+          className="font-bold text-lg tracking-tighter uppercase cursor-pointer"
+          onClick={() => setView('home')}
+        >
+          Jeb Lee
+        </div>
+        <div className="flex space-x-10 text-[10px] font-bold uppercase tracking-[0.3em]">
+          <button onClick={() => setView('home')} className={`transition-opacity ${view === 'home' ? 'opacity-100' : 'opacity-30'}`}>Home</button>
+          <button onClick={() => setView('about')} className={`transition-opacity ${view === 'about' ? 'opacity-100' : 'opacity-30'}`}>About</button>
+          <button className="opacity-30 hover:opacity-100 transition-opacity">Projects</button>
+          <button className="opacity-30 hover:opacity-100 transition-opacity">Contact</button>
         </div>
       </nav>
 
-      {/* The "Frame" Layout - Ensuring center is clear */}
-      <div className="relative z-10 w-full h-screen p-10 flex flex-col justify-between pointer-events-none">
-        
-        {/* Top Section */}
-        <div className="flex justify-between items-start pt-16 md:pt-24">
-          <div className="max-w-xs">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none mb-4">
-              CRAFTING<br/>NEW<br/>WORLDS.
-            </h1>
-          </div>
-          <div className="hidden md:block text-right">
-            <p className="font-mono text-[10px] uppercase tracking-widest opacity-40 mb-2">Current Location</p>
-            <p className="text-xs font-medium">Stockholm, SE / 59.3293° N</p>
-          </div>
-        </div>
+      {/* 3D Canvas Background */}
+      <div ref={mountRef} className="fixed inset-0 z-0 pointer-events-none" />
 
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end pb-10">
-          <div className="max-w-sm pointer-events-auto">
-            <p className="text-xs md:text-sm font-light leading-relaxed mb-6 opacity-60">
-              A Software Engineer specializing in the intersection of 3D art and functional code. Building digital experiences that defy flat constraints.
-            </p>
-            <div className="flex gap-4">
-              <button className="px-6 py-3 bg-black text-white text-[10px] uppercase tracking-widest font-bold hover:bg-zinc-800 transition-all">
-                See Projects
+      {/* VIEW: HOME */}
+      {view === 'home' && (
+        <div className="relative z-10 w-full h-screen p-10 flex flex-col justify-between pointer-events-none transition-all duration-1000 animate-in fade-in">
+          <div className="flex justify-between items-start pt-16 md:pt-24 px-8">
+            <div className="max-w-xs">
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-none mb-4">
+                CRAFTING<br/>NEW<br/>WORLDS.
+              </h1>
+            </div>
+            <div className="hidden md:block text-right">
+              <p className="font-mono text-[9px] uppercase tracking-widest opacity-40 mb-2">Core Competency</p>
+              <p className="text-xs font-medium">3D Interaction / Cloud / Frontend</p>
+            </div>
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between items-end pb-10 px-8">
+            <div className="max-w-sm pointer-events-auto">
+              <p className="text-xs md:text-sm font-light leading-relaxed mb-8 opacity-60">
+                A Software Engineer specializing in the intersection of 3D art and functional code. Building digital experiences that defy flat constraints.
+              </p>
+              <button 
+                onClick={() => setView('about')}
+                className="px-8 py-4 bg-black text-white text-[10px] uppercase tracking-widest font-bold hover:bg-zinc-800 transition-all"
+              >
+                Learn More
               </button>
             </div>
-          </div>
-          
-          <div className="mt-10 md:mt-0 text-right">
-            <div className="font-mono text-[10px] uppercase tracking-[0.5em] opacity-20 mb-4">
-              EST. 2024 — PERSISTENT
+            <div className="hidden md:block text-right">
+              <div className="font-mono text-[10px] uppercase tracking-[0.5em] opacity-20 mb-4">EST. 2024 — PERSISTENT</div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* 3D Canvas - Centered and clear of text */}
-      <div ref={mountRef} className="absolute inset-0 z-0" />
+      {/* VIEW: ABOUT */}
+      {view === 'about' && (
+        <div className="relative z-10 w-full min-h-screen pt-40 px-8 md:px-24 pb-24 transition-all duration-700 animate-in slide-in-from-bottom-12">
+          
+          {/* Intro Section */}
+          <div className="grid md:grid-cols-2 gap-20 mb-32">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.4em] mb-6 opacity-40 text-black">[ Profile Overview ]</p>
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-tight mb-8">
+                Hello, I am <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-zinc-400">Jeb Lee.</span>
+              </h2>
+            </div>
+            <div className="flex items-center">
+              <p className="text-base md:text-lg font-light leading-relaxed text-zinc-600">
+                Software Engineer with a passion for building web applications. I specialize in front-end development and have experience working with modern frameworks like <span className="text-black font-medium underline decoration-zinc-300">React and Next.js</span>. I am also familiar with back-end technologies like Node.js and Express, as well as cloud services like Docker, Kubernetes, and AWS.
+              </p>
+            </div>
+          </div>
 
-      {/* Corner Decorative Elements */}
-      <div className="fixed top-1/2 left-6 -translate-y-1/2 hidden lg:block opacity-20">
+          {/* Tech Stack Grid */}
+          <div className="mb-40">
+            <div className="flex items-center gap-4 mb-12">
+              <div className="h-[1px] w-12 bg-black"></div>
+              <h3 className="font-mono text-xs uppercase tracking-[0.5em] font-bold">Tech Stack</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-px bg-zinc-200 border border-zinc-200">
+              {[
+                "React", "Next.js", "TypeScript", "Tailwind CSS", "JavaScript", "HTML/CSS",
+                "Node.js", "Express", "Redux", "Framer Motion", "MongoDB", "Git/GitHub",
+                "AWS", "Docker", "Kubernetes"
+              ].map(skill => (
+                <div key={skill} className="bg-[#F2F2F2] p-8 aspect-square flex flex-col justify-center items-center group hover:bg-black transition-colors">
+                  <span className="font-mono text-[10px] opacity-40 group-hover:opacity-100 group-hover:text-white mb-2 uppercase tracking-tighter">0{Math.floor(Math.random()*9)}</span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-center group-hover:text-white">{skill}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Experience Section */}
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-4 mb-16">
+              <div className="h-[1px] w-12 bg-black"></div>
+              <h3 className="font-mono text-xs uppercase tracking-[0.5em] font-bold">Experience</h3>
+            </div>
+
+            <div className="space-y-0">
+              {[
+                {
+                  role: "Cloud Application Developer",
+                  company: "Pyronix",
+                  date: "2024 June — Present",
+                  desc: "Developing and maintaining cloud applications for a leading provider of security solutions. Collaborating with cross-functional teams and implementing responsive design."
+                },
+                {
+                  role: "Software Developer",
+                  company: "Oasis Studio",
+                  date: "2022 October — 2024 June",
+                  desc: "Maintained web applications using React.js and related technologies. Contributed to product design and high-quality software delivery."
+                },
+                {
+                  role: "Bsc Software Engineering",
+                  company: "Ajou University",
+                  date: "Mar 2015 — Feb 2020",
+                  desc: "Learned software design, development, and testing. Participated in group projects and completed a graduation project on core engineering topics."
+                }
+              ].map((exp, i) => (
+                <div key={i} className="relative pl-12 pb-20 group">
+                  {/* Timeline Line */}
+                  <div className="absolute left-[5px] top-2 bottom-0 w-[1px] bg-zinc-200 group-last:hidden"></div>
+                  {/* Timeline Node */}
+                  <div className="absolute left-0 top-2 w-[11px] h-[11px] bg-white border-2 border-black rounded-full z-10"></div>
+                  
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                    <div>
+                      <h4 className="text-xl font-bold tracking-tight">{exp.role}</h4>
+                      <p className="text-sm font-medium opacity-40 uppercase tracking-widest">{exp.company}</p>
+                    </div>
+                    <div className="font-mono text-[10px] opacity-40 mt-2 md:mt-0 px-3 py-1 border border-zinc-200 rounded-full">
+                      {exp.date}
+                    </div>
+                  </div>
+                  <p className="text-sm font-light leading-relaxed text-zinc-500 max-w-2xl">
+                    {exp.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Footer Call to Action */}
+          <div className="mt-40 pt-20 border-t border-zinc-200 text-center">
+            <h3 className="text-3xl font-bold tracking-tighter mb-8">Have a project in mind?</h3>
+            <div className="flex justify-center gap-12 text-[10px] font-mono uppercase tracking-[0.5em] opacity-40">
+              <a href="#" className="hover:opacity-100 transition-opacity">GitHub</a>
+              <a href="#" className="hover:opacity-100 transition-opacity">LinkedIn</a>
+              <a href="#" className="hover:opacity-100 transition-opacity">Mail</a>
+            </div>
+          </div>
+
+        </div>
+      )}
+
+      {/* Decorative Nodes (Persistent) */}
+      <div className="fixed top-1/2 left-6 -translate-y-1/2 hidden lg:block opacity-20 z-20 pointer-events-none">
         <div className="h-32 w-[1px] bg-black mb-4 mx-auto"></div>
-        <div className="font-mono text-[9px] uppercase tracking-widest [writing-mode:vertical-lr] rotate-180">Navigation Node</div>
+        <div className="font-mono text-[9px] uppercase tracking-widest [writing-mode:vertical-lr] rotate-180">
+          {view === 'home' ? 'Origin Module' : 'Biography Root'}
+        </div>
       </div>
       
-      <div className="fixed top-1/2 right-6 -translate-y-1/2 hidden lg:block opacity-20">
+      <div className="fixed top-1/2 right-6 -translate-y-1/2 hidden lg:block opacity-20 z-20 pointer-events-none">
         <div className="font-mono text-[9px] uppercase tracking-widest [writing-mode:vertical-lr]">System Protocol</div>
         <div className="h-32 w-[1px] bg-black mt-4 mx-auto"></div>
       </div>

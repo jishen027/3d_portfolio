@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 import Loader from "../components/Loader";
 import useAlert from "../hooks/useAlert";
 import Alert from "../components/Alert";
+import CTA from "../components/CTA";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -16,6 +17,7 @@ const Contact = () => {
   const handleChange = ({ target: { name, value } }) => {
     setForm({ ...form, [name]: value });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -37,7 +39,6 @@ const Contact = () => {
         setIsLoading(false);
         setForm({ name: "", email: "", message: "" });
         showAlert(true, "Message sent successfully", "success");
-        // TODO: To hide alert
         setTimeout(() => {
           setCurrentAnimation("walk");
           hideAlert();
@@ -53,85 +54,118 @@ const Contact = () => {
         }, 3000);
       });
   };
+
   const handleFocus = () => setCurrentAnimation("walk");
   const handleBlur = () => setCurrentAnimation("idle");
+
   return (
-    <section className="relative flex lg:flex-row flex-col max-container">
+    <section className="relative w-full min-h-screen pt-40 px-8 md:px-24 pb-24 bg-[#F2F2F2]">
       {alert.show && <Alert {...alert} />}
 
-      <div className="flex-1 min-w-[50%] flex flex-col">
-        <h1 className="head-text">Get in Touch</h1>
-        <form
-          className="w-full flex flex-col gap-7 mt-14"
-          onSubmit={handleSubmit}
-        >
-          <label className="text-black-500 font-semibold">Name</label>
-          <input
-            type="text"
-            name="name"
-            className="input"
-            placeholder="your name"
-            value={form.name}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
+      <div className="flex lg:flex-row flex-col gap-16">
+        {/* Left: Form */}
+        <div className="flex-1 min-w-[50%] flex flex-col">
+          <p className="font-mono text-[10px] uppercase tracking-[0.4em] mb-6 opacity-40 text-black">
+            [ Communication Protocol ]
+          </p>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight mb-12 text-[#1A1A1A]">
+            Get in{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-black to-zinc-400">
+              Touch.
+            </span>
+          </h1>
 
-          <label className="text-black-500 font-semibold">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="input"
-            placeholder="your email"
-            value={form.email}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
+          <form className="space-y-8 max-w-md" onSubmit={handleSubmit}>
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase tracking-widest opacity-40 text-black block">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={form.name}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                required
+                className="w-full bg-transparent border-b border-zinc-300 py-3 focus:outline-none focus:border-black transition-colors text-[#1A1A1A] placeholder:text-zinc-400 placeholder:text-sm"
+              />
+            </div>
 
-          <label className="text-black-500 font-semibold">Message</label>
-          <textarea
-            name="message"
-            className="textarea"
-            rows={4}
-            placeholder="your message"
-            value={form.message}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-          <button
-            className="btn"
-            type="submit"
-            disabled={isLoading}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase tracking-widest opacity-40 text-black block">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={form.email}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                required
+                className="w-full bg-transparent border-b border-zinc-300 py-3 focus:outline-none focus:border-black transition-colors text-[#1A1A1A] placeholder:text-zinc-400 placeholder:text-sm"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-[10px] font-bold uppercase tracking-widest opacity-40 text-black block">
+                Message
+              </label>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                rows={4}
+                value={form.message}
+                onChange={handleChange}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                required
+                className="w-full bg-transparent border-b border-zinc-300 py-3 focus:outline-none focus:border-black transition-colors resize-none text-[#1A1A1A] placeholder:text-zinc-400 placeholder:text-sm"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              className="w-full py-5 bg-black text-white text-[10px] font-bold uppercase tracking-[0.4em] hover:bg-zinc-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isLoading ? "Sending..." : "Send Message"}
+            </button>
+          </form>
+        </div>
+
+        {/* Right: 3D Fox */}
+        <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
+          <Canvas
+            camera={{
+              position: [0, 0, 5],
+              fov: 75,
+              near: 0.1,
+              far: 1000,
+            }}
           >
-            {isLoading ? "Sending..." : "Send"}
-          </button>
-        </form>
+            <directionalLight intensity={2.5} position={[0, 0, 1]} />
+            <ambientLight intensity={0.5} />
+            <Suspense fallback={<Loader />}>
+              <Fox
+                currentAnimation={currentAnimation}
+                position={[0.5, 0.35, 0]}
+                rotation={[12.629, -0.6, 0]}
+                scale={[0.5, 0.5, 0.5]}
+              />
+            </Suspense>
+          </Canvas>
+        </div>
       </div>
-      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
-        <Canvas
-          camera={{
-            position: [0, 0, 5],
-            fov: 75,
-            near: 0.1,
-            far: 1000,
-          }}
-        >
-          <directionalLight intensity={2.5} position={[0, 0, 1]} />
-          <ambientLight intensity={0.5} />
-          <Suspense fallback={<Loader />}>
-            <Fox
-              currentAnimation={currentAnimation}
-              position={[0.5, 0.35, 0]}
-              rotation={[12.629, -0.6, 0]}
-              scale={[0.5, 0.5, 0.5]}
-            />
-          </Suspense>
-        </Canvas>
-      </div>
+
+      {/* CTA Footer */}
+      <hr className="border-t border-zinc-200 mt-16 mb-8" />
+      <CTA />
     </section>
   );
 };

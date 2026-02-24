@@ -1,5 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
+import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Island from "../models/Island";
 import Plane from "../models/Plane";
@@ -118,12 +119,12 @@ const Home = () => {
               functional code. Building digital experiences that defy flat
               constraints.
             </p>
-            <a
-              href="#projects"
+            <Link
+              to="/projects"
               className="inline-block px-5 py-2.5 md:px-6 md:py-3 bg-foreground text-surface text-[10px] uppercase tracking-widest font-bold hover:bg-zinc-800 transition-all"
             >
               See Projects
-            </a>
+            </Link>
           </div>
           <div className="mt-6 md:mt-0 text-right">
             <div

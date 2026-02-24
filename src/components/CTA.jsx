@@ -1,30 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { socialLinks } from "../constants";
 
 const CTA = () => {
   return (
-    <section className="cta">
-      <p className="cta-text">Hava a project in mind? </p>
-      {/* social medias */}
-      <div className="flex flex-row justify-center space-x-4">
+    <div className="pt-16 border-t border-zinc-200 text-center">
+      <h3 className="text-3xl font-bold tracking-tighter mb-8">
+        Have a project in mind?
+      </h3>
+      <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
         {socialLinks.map((social) => (
           <a
             key={social.name}
             href={social.link}
             target="_blank"
             rel="noreferrer"
-            className="cta-social"
+            className="flex flex-col items-center gap-2 opacity-40 hover:opacity-100 transition-opacity group"
           >
             <img
-              className="w-8 h-8 object-contain"
               src={social.iconUrl}
               alt={social.name}
+              className="w-7 h-7 object-contain group-hover:scale-110 transition-transform duration-200"
             />
+            <span
+              className="text-[9px] uppercase tracking-[0.4em]"
+              style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            >
+              {social.name}
+            </span>
           </a>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

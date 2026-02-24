@@ -7,6 +7,7 @@ import { useState } from "react";
 import HomeInfo from "../components/HomeInfo";
 import Earth from "../models/Eearth";
 import Sky from "../models/Sky";
+import CTA from "../components/CTA";
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
@@ -63,7 +64,8 @@ const Home = () => {
   const [earthScale, earthPosition, earthRotation] = adjustEarthForScreenSize();
 
   return (
-    <section className="w-full h-screen relative bg-surface text-foreground overflow-hidden">
+    <div className="w-full bg-surface text-foreground">
+    <section className="w-full h-screen relative overflow-hidden">
 
       {/* Subtle background grid overlay */}
       <div
@@ -76,7 +78,7 @@ const Home = () => {
       />
 
       {/* HomeInfo — displayed above 3D canvas, centered horizontally near top */}
-      <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center pointer-events-none">
+      <div className="absolute top-24 md:top-28 left-0 right-0 z-10 flex items-center justify-center pointer-events-none">
         {currentStage && (
           <div className="pointer-events-auto">
             <HomeInfo
@@ -88,12 +90,12 @@ const Home = () => {
       </div>
 
       {/* Frame layout — edge-pinned content, center clear for 3D */}
-      <div className="absolute inset-0 z-10 pointer-events-none p-10 flex flex-col justify-between">
+      <div className="absolute inset-0 z-10 pointer-events-none p-4 sm:p-6 md:p-10 flex flex-col justify-between">
 
         {/* Top row: heading left, metadata right */}
-        <div className="flex justify-between items-start pt-16 md:pt-20">
+        <div className="flex justify-between items-start pt-20 md:pt-20">
           <div className="max-w-xs">
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tighter leading-none">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tighter leading-none">
               CRAFTING<br />NEW<br />WORLDS.
             </h1>
           </div>
@@ -109,21 +111,21 @@ const Home = () => {
         </div>
 
         {/* Bottom row: description + CTA left, timestamp right */}
-        <div className="flex flex-col md:flex-row justify-between items-end pb-6">
+        <div className="flex flex-col md:flex-row justify-between items-end pb-4 md:pb-6">
           <div className="max-w-sm pointer-events-auto">
-            <p className="text-xs md:text-sm font-light leading-relaxed mb-5 opacity-60">
+            <p className="text-xs md:text-sm font-light leading-relaxed mb-4 md:mb-5 opacity-60 hidden sm:block">
               A Software Engineer specializing in the intersection of 3D art and
               functional code. Building digital experiences that defy flat
               constraints.
             </p>
             <a
               href="#projects"
-              className="inline-block px-6 py-3 bg-foreground text-surface text-[10px] uppercase tracking-widest font-bold hover:bg-zinc-800 transition-all"
+              className="inline-block px-5 py-2.5 md:px-6 md:py-3 bg-foreground text-surface text-[10px] uppercase tracking-widest font-bold hover:bg-zinc-800 transition-all"
             >
               See Projects
             </a>
           </div>
-          <div className="mt-8 md:mt-0 text-right">
+          <div className="mt-6 md:mt-0 text-right">
             <div
               className="text-[9px] uppercase tracking-[0.5em] opacity-20"
               style={{ fontFamily: "'IBM Plex Mono', monospace" }}
@@ -206,6 +208,12 @@ const Home = () => {
       </div>
 
     </section>
+
+      {/* CTA section below the hero */}
+      <div className="px-8 md:px-24 py-16">
+        <CTA />
+      </div>
+    </div>
   );
 };
 

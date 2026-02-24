@@ -12,6 +12,12 @@ const Earth = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
 
+  // Track normalised mouse position for the cursor-attraction effect
+  const mouseX = useRef(0);
+  const mouseY = useRef(0);
+  // Base position from props (set once, so the attraction offsets from it)
+  const basePosition = useRef(null);
+
   const selfRotation = (object, speed) => {
     object.rotation.y += speed;
   };
@@ -44,7 +50,6 @@ const Earth = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
       const delta = (clientX - lastX.current) / viewport.width;
 
       // Update the island's rotation based on the mouse/touch movement
-      // islandRef.current.rotation.y += delta * 0.01 * Math.PI;
       earthRef.current.rotation.y += delta * 0.01 * Math.PI;
 
       // Update the reference for the last clientX position
@@ -68,13 +73,39 @@ const Earth = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     };
   }, [gl, handlePointerDown, handlePointerUp, handlePointerMove]);
 
+  // Global mouse tracking for cursor-attraction effect
+  useEffect(() => {
+    const onMouseMove = (e) => {
+      mouseX.current = (e.clientX / window.innerWidth) * 2 - 1;   // -1 … +1
+      mouseY.current = -(e.clientY / window.innerHeight) * 2 + 1; // -1 … +1
+    };
+    window.addEventListener("mousemove", onMouseMove);
+    return () => window.removeEventListener("mousemove", onMouseMove);
+  }, []);
+
   useFrame(() => {
+    // Capture base position on first frame
+    if (!basePosition.current) {
+      basePosition.current = {
+        x: earthRef.current.position.x,
+        y: earthRef.current.position.y,
+      };
+    }
+
     selfRotation(earthRef.current, -0.003);
+
+    // Cursor-attraction: gently pull the Earth toward the cursor direction
+    // (max ±0.6 units offset from base position)
+    const attractStrength = 0.8;
+    const targetX = basePosition.current.x + mouseX.current * attractStrength;
+    const targetY = basePosition.current.y + mouseY.current * attractStrength;
+    earthRef.current.position.x += (targetX - earthRef.current.position.x) * 0.04;
+    earthRef.current.position.y += (targetY - earthRef.current.position.y) * 0.04;
 
     if (!isRotating) {
       rotationSpeed.current *= dampingFactor;
 
-      //Stop ratation if the speed is less than 0.0001
+      //Stop rotation if the speed is less than 0.0001
       if (Math.abs(rotationSpeed.current) < 0.0001) {
         rotationSpeed.current = 0;
       }
@@ -86,7 +117,7 @@ const Earth = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
       const normalizedRotation =
         ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
-      // Set the current stage based on the island's orientation
+      // Set the current stage based on the earth's orientation
       switch (true) {
         case normalizedRotation >= 5 && normalizedRotation <= 6:
           setCurrentStage(4);

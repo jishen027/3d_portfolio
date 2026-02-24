@@ -79,7 +79,7 @@ const Home = () => {
       />
 
       {/* HomeInfo — displayed above 3D canvas, centered horizontally near top */}
-      <div className="absolute top-24 md:top-28 left-0 right-0 z-10 flex items-center justify-center pointer-events-none">
+      {/* <div className="absolute top-24 md:top-28 left-0 right-0 z-10 flex items-center justify-center pointer-events-none">
         {currentStage && (
           <div className="pointer-events-auto">
             <HomeInfo
@@ -88,7 +88,7 @@ const Home = () => {
             />
           </div>
         )}
-      </div>
+      </div> */}
 
       {/* Frame layout — edge-pinned content, center clear for 3D */}
       <div className="absolute inset-0 z-10 pointer-events-none p-4 sm:p-6 md:p-10 flex flex-col justify-between">
@@ -107,7 +107,7 @@ const Home = () => {
             >
               Current Location
             </p>
-            <p className="text-xs font-medium">Stockholm, SE / 59.3293° N</p>
+            <p className="text-xs font-medium">London, UK / 51.5074° N</p>
           </div>
         </div>
 

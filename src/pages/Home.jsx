@@ -6,8 +6,7 @@ import Island from "../models/Island";
 import Plane from "../models/Plane";
 import { useState } from "react";
 import HomeInfo from "../components/HomeInfo";
-import Earth from "../models/Eearth";
-import Sky from "../models/Sky";
+import Earth from "../models/Eearth";import Sky from "../models/Sky";
 import CTA from "../components/CTA";
 
 const Home = () => {

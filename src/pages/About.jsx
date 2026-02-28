@@ -8,7 +8,6 @@ const padIndex = (i) => `0${i}`;
 const About = () => {
   return (
     <section className="min-h-screen bg-surface text-foreground selection:bg-black selection:text-white">
-
       {/* Subtle background grid overlay */}
       <div
         className="fixed inset-0 z-0 pointer-events-none"
@@ -20,7 +19,6 @@ const About = () => {
       />
 
       <div className="relative z-10 px-8 md:px-24 pt-36 pb-32">
-
         {/* ── Profile Intro ──────────────────────────────────────── */}
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 mb-32">
           <div>
@@ -39,15 +37,16 @@ const About = () => {
           </div>
           <div className="flex items-center">
             <p className="text-base md:text-lg font-light leading-relaxed text-zinc-600">
-              Software Engineer with a passion for building web applications. I
-              specialize in front-end development and have experience working
-              with modern frameworks like{" "}
+              Software Engineer with a passion for architecting resilient,
+              high-concurrency systems. I specialize in cloud-native development
+              and have experience building scalable infrastructure using modern
+              tools like Docker, Kubernetes, and AWS. I am also highly
+              proficient in back-end technologies like{" "}
               <span className="text-foreground font-medium underline decoration-zinc-300">
-                React and Next.js
+                Go and C#
               </span>
-              . I am also familiar with back-end technologies like Node.js and
-              Express, as well as cloud services like Docker, Kubernetes, and
-              AWS.
+              , focusing on refactoring complex legacy code into efficient,
+              high-performance cloud solutions.
             </p>
           </div>
         </div>
@@ -113,7 +112,9 @@ const About = () => {
 
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-3">
                   <div>
-                    <h3 className="text-lg font-bold tracking-tight">{exp.title}</h3>
+                    <h3 className="text-lg font-bold tracking-tight">
+                      {exp.title}
+                    </h3>
                     <p
                       className="text-xs font-medium opacity-40 uppercase tracking-widest mt-0.5"
                       style={{ fontFamily: "'IBM Plex Mono', monospace" }}
@@ -147,11 +148,9 @@ const About = () => {
 
         {/* ── CTA Footer ────────────────────────────────────────── */}
         <CTA />
-
       </div>
     </section>
   );
 };
 
 export default About;
-

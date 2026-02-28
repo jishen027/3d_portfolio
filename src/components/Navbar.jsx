@@ -16,7 +16,7 @@ const Navbar = () => {
       {/* Logo */}
       <NavLink
         to="/"
-        className="font-bold text-lg tracking-tighter uppercase text-foreground hover:opacity-70 transition-opacity z-50 relative"
+        className="font-bold text-xl tracking-tighter uppercase text-foreground z-50 relative"
         onClick={() => setMenuOpen(false)}
       >
         Jeb Lee
@@ -29,7 +29,7 @@ const Navbar = () => {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `text-[10px] font-bold uppercase tracking-[0.3em] transition-opacity ${
+              `text-sm font-bold uppercase tracking-[0.3em] transition-opacity ${
                 isActive ? "opacity-100" : "opacity-40 hover:opacity-100"
               }`
             }

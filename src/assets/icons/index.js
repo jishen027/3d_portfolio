@@ -36,6 +36,7 @@ import ajou from './ajou.png'
 import pyronix from './pyronix.png'
 import promptnotfound from './promptnotfound.svg'
 import hiiragiexam from './hiiragiexam.svg'
+import aitodo from './aitodo.png'
 
 
 export {
@@ -77,4 +78,5 @@ export {
     pyronix,
     promptnotfound,
     hiiragiexam,
+    aitodo,
 }

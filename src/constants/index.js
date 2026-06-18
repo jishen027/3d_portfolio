@@ -34,6 +34,7 @@ import {
   pyronix,
   promptnotfound,
   hiiragiexam,
+  aitodo,
 } from "../assets/icons";
 
 export const skills = [
@@ -211,6 +212,14 @@ export const socialLinks = [
 ];
 
 export const projects = [
+  {
+    iconUrl: aitodo,
+    theme: 'btn-back-pink',
+    name: 'AI Todo',
+    description: 'An AI-powered task planning app: chat with an AI agent to break goals into scheduled, prioritized tasks across multiple plans, with a calendar view, task map, and daily focus view.',
+    link: 'https://todo.promptnotfound.com',
+    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'PostgreSQL', 'NextAuth', 'DeepSeek'],
+  },
   {
     iconUrl: promptnotfound,
     theme: 'btn-back-red',

@@ -37,6 +37,7 @@ import pyronix from './pyronix.png'
 import promptnotfound from './promptnotfound.svg'
 import hiiragiexam from './hiiragiexam.svg'
 import aitodo from './aitodo.png'
+import tradebot from './trade_bot.png'
 
 
 export {
@@ -79,4 +80,5 @@ export {
     promptnotfound,
     hiiragiexam,
     aitodo,
+    tradebot,
 }

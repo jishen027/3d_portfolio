@@ -35,6 +35,7 @@ import {
   promptnotfound,
   hiiragiexam,
   aitodo,
+  tradebot,
 } from "../assets/icons";
 
 export const skills = [
@@ -212,6 +213,14 @@ export const socialLinks = [
 ];
 
 export const projects = [
+  {
+    iconUrl: tradebot,
+    theme: 'btn-back-green',
+    name: 'Auto Trade Bot',
+    description: 'A real-time financial news pipeline that scrapes news from websites, extracts structured signals with GPT-4o-mini, stores them in PostgreSQL with vector embeddings, and feeds GPT-5.5 for regime-aware, multi-asset portfolio analysis with automatic trade execution via the Trading212 API. No UI — the linked Grafana dashboard shows trading performance. Runs on a Trading212 mock account (no real money).',
+    link: 'https://grafana.promptnotfound.com/public-dashboards/0eab566ae03f4d54adaebf5d743e1754',
+    tech: ['Python', 'OpenAI GPT', 'PostgreSQL', 'pgvector', 'Trading212 API', 'Grafana'],
+  },
   {
     iconUrl: aitodo,
     theme: 'btn-back-pink',

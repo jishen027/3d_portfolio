@@ -38,6 +38,7 @@ import promptnotfound from './promptnotfound.svg'
 import hiiragiexam from './hiiragiexam.svg'
 import aitodo from './aitodo.png'
 import tradebot from './trade_bot.png'
+import thaumion from './thaumion.svg'
 
 
 export {
@@ -81,4 +82,5 @@ export {
     hiiragiexam,
     aitodo,
     tradebot,
+    thaumion,
 }

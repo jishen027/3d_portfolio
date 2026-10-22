@@ -36,6 +36,7 @@ import {
   hiiragiexam,
   aitodo,
   tradebot,
+  thaumion,
 } from "../assets/icons";
 
 export const skills = [
@@ -214,6 +215,30 @@ export const socialLinks = [
 
 export const projects = [
   {
+    iconUrl: thaumion,
+    theme: 'btn-back-yellow',
+    name: 'Thaumion',
+    description: 'AI agent consultancy: design, deploy and operate AI agents inside your own AWS account — secure, observable and in production within weeks, not quarters.',
+    link: 'https://thaumion.com',
+    tech: ['Amazon Bedrock', 'AWS Lambda', 'Step Functions', 'Terraform', 'OpenSearch'],
+  },
+  {
+    iconUrl: aitodo,
+    theme: 'btn-back-pink',
+    name: 'Thaumion Plans',
+    description: 'AI planner for goals with a deadline: chat with an agent to turn a goal into dated, prioritized tasks, and it re-plans when life happens. Nothing is added until you approve it.',
+    link: 'https://plans.thaumion.com',
+    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'PostgreSQL', 'NextAuth', 'OpenAI'],
+  },
+  {
+    iconUrl: hiiragiexam,
+    theme: 'btn-back-green',
+    name: 'Hiiragi Exam Master',
+    description: 'Free AWS certification practice tests and mock exams with an adaptive question engine, AI performance analytics and a terminal CLI. No sign-up required.',
+    link: 'https://hiiragiexam.com/',
+    tech: ['Next.js', 'Tailwind', 'AWS', 'Supabase'],
+  },
+  {
     iconUrl: tradebot,
     theme: 'btn-back-green',
     name: 'Auto Trade Bot',
@@ -222,28 +247,12 @@ export const projects = [
     tech: ['Python', 'OpenAI GPT', 'PostgreSQL', 'pgvector', 'Trading212 API', 'Grafana'],
   },
   {
-    iconUrl: aitodo,
-    theme: 'btn-back-pink',
-    name: 'AI Todo',
-    description: 'An AI-powered task planning app: chat with an AI agent to break goals into scheduled, prioritized tasks across multiple plans, with a calendar view, task map, and daily focus view.',
-    link: 'https://todo.promptnotfound.com',
-    tech: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'PostgreSQL', 'NextAuth', 'DeepSeek'],
-  },
-  {
     iconUrl: promptnotfound,
     theme: 'btn-back-red',
     name: 'Prompt Not Found',
-    description: 'Developed a web application to Share and Discover ChatGPT Prompts for Writing, Drawing, and other Creative Activities.',
+    description: 'Version control for your prompts: fork, diff and iterate on prompts like code, so you stop overwriting your best ones.',
     link: 'https://www.promptnotfound.com/',
     tech: ['Next.js', 'Tailwind', 'OpenAI'],
-  },
-  {
-    iconUrl: hiiragiexam,
-    theme: 'btn-back-green',
-    name: 'Hiiragi Exam',
-    description: 'Onlin exam platform for virtual and in-person exams, enabling users to discover and book exams in their area.',
-    link: 'https://hiiragiexam.com/',
-    tech: ['Next.js', 'Tailwind', 'AWS', 'Supabase'],
   },
   {
     iconUrl: github,

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Portfolio | Jeb Lee</title>
+    <script>
+      // Single Page Apps for GitHub Pages (rafgraph/spa-github-pages, MIT)
+      // GitHub Pages serves this file on 404. It rewrites /3d_portfolio/<path>
+      // to /3d_portfolio/?/<path> so index.html can restore the route client-side.
+      // pathSegmentsToKeep = 1 because the site lives under the /3d_portfolio/ subpath.
+      (function (l) {
+        var pathSegmentsToKeep = 1;
+        l.replace(
+          l.protocol +
+            "//" +
+            l.hostname +
+            (l.port ? ":" + l.port : "") +
+            l.pathname
+              .split("/")
+              .slice(0, 1 + pathSegmentsToKeep)
+              .join("/") +
+            "/?/" +
+            l.pathname
+              .slice(1)
+              .split("/")
+              .slice(pathSegmentsToKeep)
+              .join("/")
+              .replace(/&/g, "~and~") +
+            (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+            l.hash
+        );
+      })(window.location);
+    </script>
+  </head>
+  <body></body>
+</html>

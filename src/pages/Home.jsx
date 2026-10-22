@@ -109,7 +109,7 @@ const Home = () => {
               >
                 Current Location
               </p>
-              <p className="text-xs font-medium">Sheffield, UK / 53.3811° N</p>
+              <p className="text-xs font-medium">London, UK / 51.5074° N</p>
             </div>
           </div>
 

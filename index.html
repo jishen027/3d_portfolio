@@ -6,6 +6,26 @@
   <link rel="icon" type="image/svg+xml" href="/car.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio | Jeb Lee</title>
+  <script>
+    // Restore SPA route from the GitHub Pages 404 redirect:
+    // /3d_portfolio/?/about -> /3d_portfolio/about (before React Router boots).
+    (function (l) {
+      if (l.search[1] === "/") {
+        var decoded = l.search
+          .slice(1)
+          .split("&")
+          .map(function (s) {
+            return s.replace(/~and~/g, "&");
+          })
+          .join("?");
+        window.history.replaceState(
+          null,
+          null,
+          l.pathname.slice(0, -1) + decoded + l.hash
+        );
+      }
+    })(window.location);
+  </script>
 <script>
     var _paq = window._paq = window._paq || [];
     // 删掉了 trackPageView 和 enableLinkTracking，交给 React 处理

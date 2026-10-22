@@ -109,7 +109,7 @@ const Home = () => {
               >
                 Current Location
               </p>
-              <p className="text-xs font-medium">London, UK / 51.5074° N</p>
+              <p className="text-xs font-medium">Sheffield, UK / 53.3811° N</p>
             </div>
           </div>
 
@@ -117,9 +117,9 @@ const Home = () => {
           <div className="flex flex-col md:flex-row justify-between items-end pb-4 md:pb-6">
             <div className="max-w-sm pointer-events-auto">
               <p className="text-xs md:text-sm font-light leading-relaxed mb-4 md:mb-5 opacity-60 hidden sm:block">
-                A Software Engineer specializing in high-concurrency
-                architecture and complex system refactoring. Transforming
-                tangled legacy code into elegant, scalable realities.
+                A Cloud Application Developer building IoT ecosystems and
+                cloud-native infrastructure on AWS. Refactoring legacy systems
+                into modern, scalable microservices.
               </p>
               <Link
                 to="/projects"

@@ -37,16 +37,15 @@ const About = () => {
           </div>
           <div className="flex items-center">
             <p className="text-base md:text-lg font-light leading-relaxed text-zinc-600">
-              Software Engineer with a passion for architecting resilient,
-              high-concurrency systems. I specialize in cloud-native development
-              and have experience building scalable infrastructure using modern
-              tools like Docker, Kubernetes, and AWS. I am also highly
-              proficient in back-end technologies like{" "}
+              Cloud Application Developer with 3+ years of experience building
+              IoT ecosystems and cloud-native infrastructure on AWS. I specialize
+              in refactoring legacy systems into modern microservices,
+              designing high-throughput data pipelines for millions of device
+              events, and building distributed systems with{" "}
               <span className="text-foreground font-medium underline decoration-zinc-300">
-                Go and C#
+                TypeScript, Node.js, C#/.NET and Terraform
               </span>
-              , focusing on refactoring complex legacy code into efficient,
-              high-performance cloud solutions.
+              .
             </p>
           </div>
         </div>

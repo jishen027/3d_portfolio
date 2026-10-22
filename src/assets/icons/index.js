@@ -30,7 +30,6 @@ import aws from './aws.svg'
 import docker from './docker.svg'
 import kubernetes from './kubernetes.svg'
 import myfair from './myfair.svg'
-import oasis from './oasis.png'
 import sheffield from './sheffield.svg'
 import ajou from './ajou.png'
 import pyronix from './pyronix.png'
@@ -39,6 +38,12 @@ import hiiragiexam from './hiiragiexam.svg'
 import aitodo from './aitodo.png'
 import tradebot from './trade_bot.png'
 import thaumion from './thaumion.svg'
+import terraform from './terraform.svg'
+import dotnet from './dotnet.svg'
+import rabbitmq from './rabbitmq.svg'
+import postgresql from './postgresql.svg'
+import python from './python.svg'
+import eyesiteview from './eyesiteview.png'
 
 
 export {
@@ -74,7 +79,6 @@ export {
     docker,
     kubernetes,
     myfair,
-    oasis,
     sheffield,
     ajou,
     pyronix,
@@ -83,4 +87,10 @@ export {
     aitodo,
     tradebot,
     thaumion,
+    terraform,
+    dotnet,
+    rabbitmq,
+    postgresql,
+    python,
+    eyesiteview,
 }

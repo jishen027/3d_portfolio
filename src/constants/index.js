@@ -27,7 +27,7 @@ import {
   tailwindcss,
   threads,
   typescript,
-  oasis,
+  eyesiteview,
   sheffield,
   ajou,
   myfair,
@@ -37,6 +37,11 @@ import {
   aitodo,
   tradebot,
   thaumion,
+  terraform,
+  dotnet,
+  rabbitmq,
+  postgresql,
+  python,
 } from "../assets/icons";
 
 export const skills = [
@@ -124,6 +129,31 @@ export const skills = [
     imageUrl: kubernetes,
     name: "Kubernetes",
     type: "DevOps",
+  },
+  {
+    imageUrl: terraform,
+    name: "Terraform",
+    type: "Cloud",
+  },
+  {
+    imageUrl: dotnet,
+    name: ".NET / C#",
+    type: "Backend",
+  },
+  {
+    imageUrl: rabbitmq,
+    name: "RabbitMQ",
+    type: "Backend",
+  },
+  {
+    imageUrl: postgresql,
+    name: "PostgreSQL",
+    type: "Database",
+  },
+  {
+    imageUrl: python,
+    name: "Python",
+    type: "Backend",
   }
 ];
 
@@ -133,29 +163,32 @@ export const experiences = [
     company_name: "Pyronix",
     icon: pyronix,
     iconBg: "#f1f1f1",
-    date: "2024 June - Present",
+    date: "June 2024 - Present",
     points: [
-      "Developing and maintaining cloud applications for Pyronix, a leading provider of security solutions.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Refactored a legacy IoT Polling Server from Visual Basic to a modern C# microservices architecture, serving thousands of connected security devices with improved scalability and maintainability.",
+      "Designed and implemented a dynamic PIR-Cam image decryption and processing protocol, enabling secure high-volume image ingestion with automated storage on AWS S3.",
+      "Built a distributed load-testing framework simulating 10,000-12,000 concurrent IoT device connections, identifying bottlenecks and achieving a 99.8% success rate under peak load.",
+      "Deployed AWS infrastructure using Terraform, including EKS clusters, Elastic Beanstalk environments, and automated CI/CD pipelines via AWS CodePipeline with 99%+ deployment reliability.",
+      "Decomposed the monolithic Polling Server into independent microservices (panel connection, app connection, database, message queue) integrated with RabbitMQ for high-concurrency workloads.",
+      "Authored technical documentation, API references and architecture diagrams; completed multiple hardware validation rounds with a 100% pass rate.",
     ],
   },
   {
     title: "Software Developer",
-    company_name: "Oasis Studio",
-    icon: oasis,
+    company_name: "EyeSiteView",
+    icon: eyesiteview,
     iconBg: "#accbe1",
-    date: " 2022 October - 2024 June",
+    date: "October 2022 - June 2024",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Designed, deployed and maintained cloud-native applications on AWS (IAM, VPC, EKS, ECR, EC2, ELB, S3), ensuring secure, scalable and highly available environments.",
+      "Containerised services with Docker and orchestrated workloads via Kubernetes (EKS), improving system reliability and scalability.",
+      "Built event-driven image processing pipelines using AWS Lambda, S3 triggers and API Gateway for automated handling of large volumes of device-generated content.",
+      "Established a unified DevOps environment using Azure DevOps with Git-based workflows and Kanban boards, designing automated CI/CD pipelines that significantly reduced deployment time.",
+      "Developed backend services for asynchronous processing, secure data handling and high-throughput API endpoints.",
     ],
   },
   {
-    title: "Msc Student in Advanced Computer Science",
+    title: "MSc Advanced Computer Science",
     company_name: "The University of Sheffield",
     icon: sheffield,
     date: " September 2021 - October 2022",
@@ -167,21 +200,18 @@ export const experiences = [
     ],
   },
   {
-    title: "Web Developer",
-    company_name: "MyFair.co",
+    title: "Junior Web Developer",
+    company_name: "MyFair",
     icon: myfair,
     iconBg: "#b7e4c7",
-    date: "Jun 2019 - Nov 2019",
+    date: "June 2019 - September 2019",
     points: [
-      "Developped the Business Match System for MyFair, a key graduation project at Ajou University, using Spring Boot, Vue.js, MySQL, Socket.io, and GraphQL.",
-      "Enabled Korean enterprises to identify overseas opportunities, leveraging technology for international business outreach.",
-      "Utilized data from an online expo booking platform to facilitate smart business matchmaking, fostering global connections.",
-      "Contributed significantly to international business engagement, showcasing the impact of technology in global market expansion."
-    ]
-
+      "Developed an intelligent business-matching platform for Korean SMEs using Spring Boot, GraphQL and MySQL.",
+      "Collaborated in a full-stack environment, gaining experience in distributed API design and cloud-ready backend development.",
+    ],
   },
   {
-    title: "Bsc Student in Software Engineering",
+    title: "BSc Computer Software Engineering",
     company_name: "Ajou University",
     icon: ajou,
     iconBg: "#a2d2ff",
